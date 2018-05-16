@@ -1,0 +1,18 @@
+std_vector_LHElepton_pt
+std_vector_LHElepton_eta 
+std_vector_LHElepton_phi 
+std_vector_LHElepton_id		//identifica le particelle e la loro carica, il segno rappresenta la carica e il numero il tipo di particella
+
+std_vector_LHEparton_pt 	//quark e gluoni
+std_vector_LHEparton_eta 
+std_vector_LHEparton_phi 
+std_vector_LHEparton_id
+
+std_vector_LHEneutrino_pt
+std_vector_LHEneutrino_eta
+std_vector_LHEneutrino_phi
+std_vector_LHEneutrino_id
+
+metLHEpt
+metLHEphi
+metLHEeta
