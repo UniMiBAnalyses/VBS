@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Wed Apr 11 00:32:08 2018 by ROOT version 5.34/30
+// Wed Mar 21 10:56:25 2018 by ROOT version 5.34/30
 // from TTree latino/probe_tree
-// found on file: latino_WpWpJJ_EWK.root
+// found on file: latino_WpWmJJ_EWK.root
 //////////////////////////////////////////////////////////
 
 #ifndef myselector_h
@@ -21,10 +21,13 @@
 
 class myselector : public TSelector {
 public :
-   TTree          *fChain;   //!pointer to the analyzed TTree or TChain
+   TTree          *fChain;            //!pointer to the analyzed TTree or TChain
+   TTree          *fChain_selected;   //definito da me
+
+   TFile          *treefile;           //File di destinazione del TTree
 
    // Declaration of leaf types
-   TLorentzVector  p_parton1;
+   TLorentzVector  p_parton1;          //definite da me
    TLorentzVector  p_parton2;
    TLorentzVector  p_lepton1;
    TLorentzVector  p_lepton2;
@@ -38,11 +41,12 @@ public :
    TLorentzVector  p_met;
    TLorentzVector  p_lepton1_t;
    TLorentzVector  p_lepton2_t;
+
    Float_t         LHEneutrino_ptsum;
    Float_t         LHEneutrino_etasum;
    Float_t         LHEneutrino_phisum;
-   Float_t         LHE_mjj;
-   Float_t         LHE_mlvlv;
+   Float_t	       LHE_mjj;
+   Float_t	       LHE_mlvlv;
    Float_t         LHE_mlvlv_t;
    Float_t         LHE_mllmet;
    Float_t         LHE_mll;
@@ -50,29 +54,30 @@ public :
    Float_t         LHE_dphill;
    Float_t         LHE_dphilmet1;
    Float_t         LHE_dphilmet2;
-   TH1F *          _histo_leptons_per_event;
-   TH1F *          _histo_partons_per_event;
-   TH1F *          _histo_jj_deltaeta;
-   TH1F *          _histo_jj_m;
-   TH1F *          _histo_LHEmlvlv;
-   TH1F *          _histo_LHEneutrino_ptsum;
-   TH1F *          _histo_LHEneutrino_etasum;
-   TH1F *          _histo_LHEneutrino_phisum;
-   TH1F *          _histo_LHElepton_pt;
-   TH1F *          _histo_LHElepton_eta;
-   TH1F *          _histo_LHElepton_phi;
-   TH1F *          _histo_LHElepton_id;
-   TH1F *          _histo_LHEparton_pt;
-   TH1F *          _histo_LHEparton_eta;
-   TH1F *          _histo_LHEparton_phi;
-   TH1F *          _histo_LHEparton_id;
-   TH1F *          _histo_LHEneutrino_pt;
-   TH1F *          _histo_LHEneutrino_eta;
-   TH1F *          _histo_LHEneutrino_phi;
-   TH1F *          _histo_LHEneutrino_id;
-   TH1F *          _histo_metLHE_pt;
-   TH1F *          _histo_metLHE_eta;
-   TH1F *          _histo_metLHE_phi;
+
+   TH1F *	       _histo_leptons_per_event;
+   TH1F *	       _histo_partons_per_event;
+   TH1F *	       _histo_jj_deltaeta;
+   TH1F *	       _histo_jj_m;
+   TH1F *	       _histo_LHEmlvlv;
+   TH1F *	       _histo_LHEneutrino_ptsum;
+   TH1F *	       _histo_LHEneutrino_etasum;
+   TH1F *	       _histo_LHEneutrino_phisum;
+   TH1F *	       _histo_LHElepton_pt;
+   TH1F *	       _histo_LHElepton_eta;
+   TH1F *	       _histo_LHElepton_phi;
+   TH1F *	       _histo_LHElepton_id;
+   TH1F *	       _histo_LHEparton_pt;
+   TH1F *	       _histo_LHEparton_eta;
+   TH1F *	       _histo_LHEparton_phi;
+   TH1F *	       _histo_LHEparton_id;
+   TH1F *	       _histo_LHEneutrino_pt;
+   TH1F *	       _histo_LHEneutrino_eta;
+   TH1F *	       _histo_LHEneutrino_phi;
+   TH1F *	       _histo_LHEneutrino_id;
+   TH1F *	       _histo_metLHE_pt;
+   TH1F *	       _histo_metLHE_eta;
+   TH1F *	       _histo_metLHE_phi;
    TH2F *          _histo2_lepton1_pt_mlvlv;
    TH2F *          _histo2_lepton2_pt_mlvlv;
    TH2F *          _histo2_met_pt_mlvlv;
@@ -84,6 +89,18 @@ public :
    TH2F *          _histo2_dphilmet1_mlvlv;
    TH2F *          _histo2_dphilmet2_mlvlv;
    TH2F *          _histo2_dphillxmll_mlvlv;
+
+   vector<float>   *s_std_vector_LHElepton_pt;     //definisco le variabili di fChain_selected
+   Float_t         s_metLHEpt;
+   Float_t         s_LHE_mlvlv;
+   Float_t         s_LHE_mlvlv_t;
+   Float_t         s_LHE_mllmet;
+   Float_t         s_LHE_mll;
+   Float_t         s_LHE_theta;
+   Float_t         s_LHE_dphill;
+   Float_t         s_LHE_dphilmet1;
+   Float_t         s_LHE_dphilmet2;
+
    Float_t         GEN_weight_SM;
    Float_t         Gen_ZGstar_MomId;
    Float_t         Gen_ZGstar_MomInitStatus;
@@ -366,6 +383,8 @@ public :
    UInt_t          run;
    UInt_t          lumi;
    UInt_t          event;
+   Float_t         Xsec;
+   Float_t         baseW;
    vector<float>   *std_vector_electron_isTightLepton_cut_WP_Tight80X_SS;
    vector<float>   *std_vector_vetolepton_flavour;
    vector<float>   *std_vector_electron_isTightLepton_mva_90p_Iso2016;
@@ -469,6 +488,7 @@ public :
    vector<float>   *std_vector_lepton_photonIso;
    vector<float>   *std_vector_lepton_closejet_eta;
    vector<float>   *std_vector_lepton_closejet_PartonFlavour;
+   vector<float>   *std_vector_lepton_genmatched;
    vector<float>   *std_vector_lepton_eleIdMvaWp90;
    vector<float>   *std_vector_lepton_chargedHadronMiniIso;
    vector<float>   *std_vector_lepton_closejet_pt;
@@ -500,6 +520,7 @@ public :
    vector<float>   *std_vector_lepton_eleIdHLT;
    vector<float>   *std_vector_lepton_ch;
    vector<float>   *std_vector_lepton_flavour;
+   vector<float>   *std_vector_lepton_promptgenmatched;
    vector<float>   *std_vector_lepton_closejet_drlj;
    vector<float>   *std_vector_lepton_eleIdTight;
    vector<float>   *std_vector_lepton_eleIdMvaValue;
@@ -508,8 +529,146 @@ public :
    vector<float>   *std_vector_lepton_isTightMuon;
    Float_t         metPfType1Phi;
    Float_t         metPfType1;
+   Float_t         bPogSF_CMVAL;
+   Float_t         bPogSF_CMVAL_up;
+   Float_t         bPogSF_CMVAL_udsg_up;
+   Float_t         bPogSF_CMVAL_bc_up;
+   Float_t         bPogSF_CMVAL_down;
+   Float_t         bPogSF_CMVAL_udsg_down;
+   Float_t         bPogSF_CMVAL_bc_down;
+   Float_t         bPogSF_CMVAM;
+   Float_t         bPogSF_CMVAM_up;
+   Float_t         bPogSF_CMVAM_udsg_up;
+   Float_t         bPogSF_CMVAM_bc_up;
+   Float_t         bPogSF_CMVAM_down;
+   Float_t         bPogSF_CMVAM_udsg_down;
+   Float_t         bPogSF_CMVAM_bc_down;
+   Float_t         bPogSF_CMVAT;
+   Float_t         bPogSF_CMVAT_up;
+   Float_t         bPogSF_CMVAT_udsg_up;
+   Float_t         bPogSF_CMVAT_bc_up;
+   Float_t         bPogSF_CMVAT_down;
+   Float_t         bPogSF_CMVAT_udsg_down;
+   Float_t         bPogSF_CMVAT_bc_down;
+   Float_t         bPogSF_CSVL;
+   Float_t         bPogSF_CSVL_up;
+   Float_t         bPogSF_CSVL_udsg_up;
+   Float_t         bPogSF_CSVL_bc_up;
+   Float_t         bPogSF_CSVL_down;
+   Float_t         bPogSF_CSVL_udsg_down;
+   Float_t         bPogSF_CSVL_bc_down;
+   Float_t         bPogSF_CSVM;
+   Float_t         bPogSF_CSVM_up;
+   Float_t         bPogSF_CSVM_udsg_up;
+   Float_t         bPogSF_CSVM_bc_up;
+   Float_t         bPogSF_CSVM_down;
+   Float_t         bPogSF_CSVM_udsg_down;
+   Float_t         bPogSF_CSVM_bc_down;
+   Float_t         bPogSF_CSVT;
+   Float_t         bPogSF_CSVT_up;
+   Float_t         bPogSF_CSVT_udsg_up;
+   Float_t         bPogSF_CSVT_bc_up;
+   Float_t         bPogSF_CSVT_down;
+   Float_t         bPogSF_CSVT_udsg_down;
+   Float_t         bPogSF_CSVT_bc_down;
+   Float_t         bPogSF_deepCSVL;
+   Float_t         bPogSF_deepCSVL_up;
+   Float_t         bPogSF_deepCSVL_udsg_up;
+   Float_t         bPogSF_deepCSVL_bc_up;
+   Float_t         bPogSF_deepCSVL_down;
+   Float_t         bPogSF_deepCSVL_udsg_down;
+   Float_t         bPogSF_deepCSVL_bc_down;
+   Float_t         bPogSF_deepCSVM;
+   Float_t         bPogSF_deepCSVM_up;
+   Float_t         bPogSF_deepCSVM_udsg_up;
+   Float_t         bPogSF_deepCSVM_bc_up;
+   Float_t         bPogSF_deepCSVM_down;
+   Float_t         bPogSF_deepCSVM_udsg_down;
+   Float_t         bPogSF_deepCSVM_bc_down;
+   Float_t         bPogSF_deepCSVT;
+   Float_t         bPogSF_deepCSVT_up;
+   Float_t         bPogSF_deepCSVT_udsg_up;
+   Float_t         bPogSF_deepCSVT_bc_up;
+   Float_t         bPogSF_deepCSVT_down;
+   Float_t         bPogSF_deepCSVT_udsg_down;
+   Float_t         bPogSF_deepCSVT_bc_down;
+   Float_t         bPogSF;
+   Float_t         bPogSFUp;
+   Float_t         bPogSFDown;
+   Float_t         bPogSF_CMVAreshape;
+   Float_t         bPogSF_CMVAreshape_up_jes;
+   Float_t         bPogSF_CMVAreshape_up_lf;
+   Float_t         bPogSF_CMVAreshape_up_hfstats1;
+   Float_t         bPogSF_CMVAreshape_up_hfstats2;
+   Float_t         bPogSF_CMVAreshape_up_cferr1;
+   Float_t         bPogSF_CMVAreshape_up_cferr2;
+   Float_t         bPogSF_CMVAreshape_up_hf;
+   Float_t         bPogSF_CMVAreshape_up_lfstats1;
+   Float_t         bPogSF_CMVAreshape_up_lfstats2;
+   Float_t         bPogSF_CMVAreshape_down_jes;
+   Float_t         bPogSF_CMVAreshape_down_lf;
+   Float_t         bPogSF_CMVAreshape_down_hfstats1;
+   Float_t         bPogSF_CMVAreshape_down_hfstats2;
+   Float_t         bPogSF_CMVAreshape_down_cferr1;
+   Float_t         bPogSF_CMVAreshape_down_cferr2;
+   Float_t         bPogSF_CMVAreshape_down_hf;
+   Float_t         bPogSF_CMVAreshape_down_lfstats1;
+   Float_t         bPogSF_CMVAreshape_down_lfstats2;
+   Float_t         bPogSF_CSVreshape;
+   Float_t         bPogSF_CSVreshape_up_jes;
+   Float_t         bPogSF_CSVreshape_up_lf;
+   Float_t         bPogSF_CSVreshape_up_hfstats1;
+   Float_t         bPogSF_CSVreshape_up_hfstats2;
+   Float_t         bPogSF_CSVreshape_up_cferr1;
+   Float_t         bPogSF_CSVreshape_up_cferr2;
+   Float_t         bPogSF_CSVreshape_up_hf;
+   Float_t         bPogSF_CSVreshape_up_lfstats1;
+   Float_t         bPogSF_CSVreshape_up_lfstats2;
+   Float_t         bPogSF_CSVreshape_down_jes;
+   Float_t         bPogSF_CSVreshape_down_lf;
+   Float_t         bPogSF_CSVreshape_down_hfstats1;
+   Float_t         bPogSF_CSVreshape_down_hfstats2;
+   Float_t         bPogSF_CSVreshape_down_cferr1;
+   Float_t         bPogSF_CSVreshape_down_cferr2;
+   Float_t         bPogSF_CSVreshape_down_hf;
+   Float_t         bPogSF_CSVreshape_down_lfstats1;
+   Float_t         bPogSF_CSVreshape_down_lfstats2;
+   Float_t         iRunPeriod;
+   Float_t         puW;
+   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2016_Up;
+   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2016_Down;
+   vector<float>   *std_vector_muon_idisoW_cut_Tight80x_Down;
+   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X;
+   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_Down;
+   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_SS;
+   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_Syst;
+   vector<float>   *std_vector_lepton_recoW_Up;
+   vector<float>   *std_vector_lepton_recoW_Down;
+   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_Up;
+   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2016_Up;
+   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2015;
+   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2016;
+   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down;
+   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2016_Down;
+   vector<float>   *std_vector_muon_idisoW_cut_Tight80x;
+   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up;
+   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2015_Up;
+   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2015;
+   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2015_Syst;
+   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst;
+   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2015_Down;
+   vector<float>   *std_vector_muon_idisoW_cut_Tight80x_Syst;
+   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2015_Syst;
+   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2016_Syst;
+   vector<float>   *std_vector_lepton_recoW;
+   vector<float>   *std_vector_muon_idisoW_cut_Tight80x_Up;
+   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2015_Up;
+   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2016;
+   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2016_Syst;
+   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2015_Down;
    Float_t         pTWW;
    Float_t         mcoll;
+   //Float_t         mT2;
    Float_t         m2ljj30;
    Float_t         mcollWW;
    Float_t         dphilep2jet2;
@@ -622,147 +781,6 @@ public :
    Float_t         zbDeltaR_zh4l;
    Float_t         dymvaggh;
    Float_t         dymvavbf;
-   Float_t         iRunPeriod;
-   Float_t         puW;
-   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2016_Up;
-   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2016_Down;
-   vector<float>   *std_vector_muon_idisoW_cut_Tight80x_Down;
-   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X;
-   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_Down;
-   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_SS;
-   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_Syst;
-   vector<float>   *std_vector_lepton_recoW_Up;
-   vector<float>   *std_vector_lepton_recoW_Down;
-   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_Up;
-   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2016_Up;
-   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2015;
-   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2016;
-   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down;
-   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2016_Down;
-   vector<float>   *std_vector_muon_idisoW_cut_Tight80x;
-   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up;
-   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2015_Up;
-   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2015;
-   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2015_Syst;
-   vector<float>   *std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst;
-   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2015_Down;
-   vector<float>   *std_vector_muon_idisoW_cut_Tight80x_Syst;
-   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2015_Syst;
-   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2016_Syst;
-   vector<float>   *std_vector_lepton_recoW;
-   vector<float>   *std_vector_muon_idisoW_cut_Tight80x_Up;
-   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2015_Up;
-   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2016;
-   vector<float>   *std_vector_electron_idisoW_mva_80p_Iso2016_Syst;
-   vector<float>   *std_vector_electron_idisoW_mva_90p_Iso2015_Down;
-   Float_t         Xsec;
-   Float_t         baseW;
-   Float_t         bPogSF_CMVAL;
-   Float_t         bPogSF_CMVAL_up;
-   Float_t         bPogSF_CMVAL_udsg_up;
-   Float_t         bPogSF_CMVAL_bc_up;
-   Float_t         bPogSF_CMVAL_down;
-   Float_t         bPogSF_CMVAL_udsg_down;
-   Float_t         bPogSF_CMVAL_bc_down;
-   Float_t         bPogSF_CMVAM;
-   Float_t         bPogSF_CMVAM_up;
-   Float_t         bPogSF_CMVAM_udsg_up;
-   Float_t         bPogSF_CMVAM_bc_up;
-   Float_t         bPogSF_CMVAM_down;
-   Float_t         bPogSF_CMVAM_udsg_down;
-   Float_t         bPogSF_CMVAM_bc_down;
-   Float_t         bPogSF_CMVAT;
-   Float_t         bPogSF_CMVAT_up;
-   Float_t         bPogSF_CMVAT_udsg_up;
-   Float_t         bPogSF_CMVAT_bc_up;
-   Float_t         bPogSF_CMVAT_down;
-   Float_t         bPogSF_CMVAT_udsg_down;
-   Float_t         bPogSF_CMVAT_bc_down;
-   Float_t         bPogSF_CSVL;
-   Float_t         bPogSF_CSVL_up;
-   Float_t         bPogSF_CSVL_udsg_up;
-   Float_t         bPogSF_CSVL_bc_up;
-   Float_t         bPogSF_CSVL_down;
-   Float_t         bPogSF_CSVL_udsg_down;
-   Float_t         bPogSF_CSVL_bc_down;
-   Float_t         bPogSF_CSVM;
-   Float_t         bPogSF_CSVM_up;
-   Float_t         bPogSF_CSVM_udsg_up;
-   Float_t         bPogSF_CSVM_bc_up;
-   Float_t         bPogSF_CSVM_down;
-   Float_t         bPogSF_CSVM_udsg_down;
-   Float_t         bPogSF_CSVM_bc_down;
-   Float_t         bPogSF_CSVT;
-   Float_t         bPogSF_CSVT_up;
-   Float_t         bPogSF_CSVT_udsg_up;
-   Float_t         bPogSF_CSVT_bc_up;
-   Float_t         bPogSF_CSVT_down;
-   Float_t         bPogSF_CSVT_udsg_down;
-   Float_t         bPogSF_CSVT_bc_down;
-   Float_t         bPogSF_deepCSVL;
-   Float_t         bPogSF_deepCSVL_up;
-   Float_t         bPogSF_deepCSVL_udsg_up;
-   Float_t         bPogSF_deepCSVL_bc_up;
-   Float_t         bPogSF_deepCSVL_down;
-   Float_t         bPogSF_deepCSVL_udsg_down;
-   Float_t         bPogSF_deepCSVL_bc_down;
-   Float_t         bPogSF_deepCSVM;
-   Float_t         bPogSF_deepCSVM_up;
-   Float_t         bPogSF_deepCSVM_udsg_up;
-   Float_t         bPogSF_deepCSVM_bc_up;
-   Float_t         bPogSF_deepCSVM_down;
-   Float_t         bPogSF_deepCSVM_udsg_down;
-   Float_t         bPogSF_deepCSVM_bc_down;
-   Float_t         bPogSF_deepCSVT;
-   Float_t         bPogSF_deepCSVT_up;
-   Float_t         bPogSF_deepCSVT_udsg_up;
-   Float_t         bPogSF_deepCSVT_bc_up;
-   Float_t         bPogSF_deepCSVT_down;
-   Float_t         bPogSF_deepCSVT_udsg_down;
-   Float_t         bPogSF_deepCSVT_bc_down;
-   Float_t         bPogSF;
-   Float_t         bPogSFUp;
-   Float_t         bPogSFDown;
-   Float_t         bPogSF_CMVAreshape;
-   Float_t         bPogSF_CMVAreshape_up_jes;
-   Float_t         bPogSF_CMVAreshape_up_lf;
-   Float_t         bPogSF_CMVAreshape_up_hfstats1;
-   Float_t         bPogSF_CMVAreshape_up_hfstats2;
-   Float_t         bPogSF_CMVAreshape_up_cferr1;
-   Float_t         bPogSF_CMVAreshape_up_cferr2;
-   Float_t         bPogSF_CMVAreshape_up_hf;
-   Float_t         bPogSF_CMVAreshape_up_lfstats1;
-   Float_t         bPogSF_CMVAreshape_up_lfstats2;
-   Float_t         bPogSF_CMVAreshape_down_jes;
-   Float_t         bPogSF_CMVAreshape_down_lf;
-   Float_t         bPogSF_CMVAreshape_down_hfstats1;
-   Float_t         bPogSF_CMVAreshape_down_hfstats2;
-   Float_t         bPogSF_CMVAreshape_down_cferr1;
-   Float_t         bPogSF_CMVAreshape_down_cferr2;
-   Float_t         bPogSF_CMVAreshape_down_hf;
-   Float_t         bPogSF_CMVAreshape_down_lfstats1;
-   Float_t         bPogSF_CMVAreshape_down_lfstats2;
-   Float_t         bPogSF_CSVreshape;
-   Float_t         bPogSF_CSVreshape_up_jes;
-   Float_t         bPogSF_CSVreshape_up_lf;
-   Float_t         bPogSF_CSVreshape_up_hfstats1;
-   Float_t         bPogSF_CSVreshape_up_hfstats2;
-   Float_t         bPogSF_CSVreshape_up_cferr1;
-   Float_t         bPogSF_CSVreshape_up_cferr2;
-   Float_t         bPogSF_CSVreshape_up_hf;
-   Float_t         bPogSF_CSVreshape_up_lfstats1;
-   Float_t         bPogSF_CSVreshape_up_lfstats2;
-   Float_t         bPogSF_CSVreshape_down_jes;
-   Float_t         bPogSF_CSVreshape_down_lf;
-   Float_t         bPogSF_CSVreshape_down_hfstats1;
-   Float_t         bPogSF_CSVreshape_down_hfstats2;
-   Float_t         bPogSF_CSVreshape_down_cferr1;
-   Float_t         bPogSF_CSVreshape_down_cferr2;
-   Float_t         bPogSF_CSVreshape_down_hf;
-   Float_t         bPogSF_CSVreshape_down_lfstats1;
-   Float_t         bPogSF_CSVreshape_down_lfstats2;
-   vector<float>   *std_vector_lepton_genmatched;
-   vector<float>   *std_vector_lepton_promptgenmatched;
    vector<float>   *std_vector_tau_SF;
    vector<float>   *std_vector_tau_SF_Up;
    vector<float>   *std_vector_tau_SF_Down;
@@ -1222,6 +1240,8 @@ public :
    TBranch        *b_run;   //!
    TBranch        *b_lumi;   //!
    TBranch        *b_event;   //!
+   TBranch        *b_Xsec;   //!
+   TBranch        *b_baseW;   //!
    TBranch        *b_std_vector_electron_isTightLepton_cut_WP_Tight80X_SS;   //!
    TBranch        *b_std_vector_vetolepton_flavour;   //!
    TBranch        *b_std_vector_electron_isTightLepton_mva_90p_Iso2016;   //!
@@ -1325,6 +1345,7 @@ public :
    TBranch        *b_std_vector_lepton_photonIso;   //!
    TBranch        *b_std_vector_lepton_closejet_eta;   //!
    TBranch        *b_std_vector_lepton_closejet_PartonFlavour;   //!
+   TBranch        *b_std_vector_lepton_genmatched;   //!
    TBranch        *b_std_vector_lepton_eleIdMvaWp90;   //!
    TBranch        *b_std_vector_lepton_chargedHadronMiniIso;   //!
    TBranch        *b_std_vector_lepton_closejet_pt;   //!
@@ -1356,6 +1377,7 @@ public :
    TBranch        *b_std_vector_lepton_eleIdHLT;   //!
    TBranch        *b_std_vector_lepton_ch;   //!
    TBranch        *b_std_vector_lepton_flavour;   //!
+   TBranch        *b_std_vector_lepton_promptgenmatched;   //!
    TBranch        *b_std_vector_lepton_closejet_drlj;   //!
    TBranch        *b_std_vector_lepton_eleIdTight;   //!
    TBranch        *b_std_vector_lepton_eleIdMvaValue;   //!
@@ -1364,8 +1386,146 @@ public :
    TBranch        *b_std_vector_lepton_isTightMuon;   //!
    TBranch        *b_metPfType1Phi;   //!
    TBranch        *b_metPfType1;   //!
+   TBranch        *b_bPogSF_CMVAL;   //!
+   TBranch        *b_bPogSF_CMVAL_up;   //!
+   TBranch        *b_bPogSF_CMVAL_udsg_up;   //!
+   TBranch        *b_bPogSF_CMVAL_bc_up;   //!
+   TBranch        *b_bPogSF_CMVAL_down;   //!
+   TBranch        *b_bPogSF_CMVAL_udsg_down;   //!
+   TBranch        *b_bPogSF_CMVAL_bc_down;   //!
+   TBranch        *b_bPogSF_CMVAM;   //!
+   TBranch        *b_bPogSF_CMVAM_up;   //!
+   TBranch        *b_bPogSF_CMVAM_udsg_up;   //!
+   TBranch        *b_bPogSF_CMVAM_bc_up;   //!
+   TBranch        *b_bPogSF_CMVAM_down;   //!
+   TBranch        *b_bPogSF_CMVAM_udsg_down;   //!
+   TBranch        *b_bPogSF_CMVAM_bc_down;   //!
+   TBranch        *b_bPogSF_CMVAT;   //!
+   TBranch        *b_bPogSF_CMVAT_up;   //!
+   TBranch        *b_bPogSF_CMVAT_udsg_up;   //!
+   TBranch        *b_bPogSF_CMVAT_bc_up;   //!
+   TBranch        *b_bPogSF_CMVAT_down;   //!
+   TBranch        *b_bPogSF_CMVAT_udsg_down;   //!
+   TBranch        *b_bPogSF_CMVAT_bc_down;   //!
+   TBranch        *b_bPogSF_CSVL;   //!
+   TBranch        *b_bPogSF_CSVL_up;   //!
+   TBranch        *b_bPogSF_CSVL_udsg_up;   //!
+   TBranch        *b_bPogSF_CSVL_bc_up;   //!
+   TBranch        *b_bPogSF_CSVL_down;   //!
+   TBranch        *b_bPogSF_CSVL_udsg_down;   //!
+   TBranch        *b_bPogSF_CSVL_bc_down;   //!
+   TBranch        *b_bPogSF_CSVM;   //!
+   TBranch        *b_bPogSF_CSVM_up;   //!
+   TBranch        *b_bPogSF_CSVM_udsg_up;   //!
+   TBranch        *b_bPogSF_CSVM_bc_up;   //!
+   TBranch        *b_bPogSF_CSVM_down;   //!
+   TBranch        *b_bPogSF_CSVM_udsg_down;   //!
+   TBranch        *b_bPogSF_CSVM_bc_down;   //!
+   TBranch        *b_bPogSF_CSVT;   //!
+   TBranch        *b_bPogSF_CSVT_up;   //!
+   TBranch        *b_bPogSF_CSVT_udsg_up;   //!
+   TBranch        *b_bPogSF_CSVT_bc_up;   //!
+   TBranch        *b_bPogSF_CSVT_down;   //!
+   TBranch        *b_bPogSF_CSVT_udsg_down;   //!
+   TBranch        *b_bPogSF_CSVT_bc_down;   //!
+   TBranch        *b_bPogSF_deepCSVL;   //!
+   TBranch        *b_bPogSF_deepCSVL_up;   //!
+   TBranch        *b_bPogSF_deepCSVL_udsg_up;   //!
+   TBranch        *b_bPogSF_deepCSVL_bc_up;   //!
+   TBranch        *b_bPogSF_deepCSVL_down;   //!
+   TBranch        *b_bPogSF_deepCSVL_udsg_down;   //!
+   TBranch        *b_bPogSF_deepCSVL_bc_down;   //!
+   TBranch        *b_bPogSF_deepCSVM;   //!
+   TBranch        *b_bPogSF_deepCSVM_up;   //!
+   TBranch        *b_bPogSF_deepCSVM_udsg_up;   //!
+   TBranch        *b_bPogSF_deepCSVM_bc_up;   //!
+   TBranch        *b_bPogSF_deepCSVM_down;   //!
+   TBranch        *b_bPogSF_deepCSVM_udsg_down;   //!
+   TBranch        *b_bPogSF_deepCSVM_bc_down;   //!
+   TBranch        *b_bPogSF_deepCSVT;   //!
+   TBranch        *b_bPogSF_deepCSVT_up;   //!
+   TBranch        *b_bPogSF_deepCSVT_udsg_up;   //!
+   TBranch        *b_bPogSF_deepCSVT_bc_up;   //!
+   TBranch        *b_bPogSF_deepCSVT_down;   //!
+   TBranch        *b_bPogSF_deepCSVT_udsg_down;   //!
+   TBranch        *b_bPogSF_deepCSVT_bc_down;   //!
+   TBranch        *b_bPogSF;   //!
+   TBranch        *b_bPogSFUp;   //!
+   TBranch        *b_bPogSFDown;   //!
+   TBranch        *b_bPogSF_CMVAreshape;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_jes;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_lf;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_hfstats1;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_hfstats2;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_cferr1;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_cferr2;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_hf;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_lfstats1;   //!
+   TBranch        *b_bPogSF_CMVAreshape_up_lfstats2;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_jes;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_lf;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_hfstats1;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_hfstats2;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_cferr1;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_cferr2;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_hf;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_lfstats1;   //!
+   TBranch        *b_bPogSF_CMVAreshape_down_lfstats2;   //!
+   TBranch        *b_bPogSF_CSVreshape;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_jes;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_lf;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_hfstats1;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_hfstats2;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_cferr1;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_cferr2;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_hf;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_lfstats1;   //!
+   TBranch        *b_bPogSF_CSVreshape_up_lfstats2;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_jes;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_lf;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_hfstats1;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_hfstats2;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_cferr1;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_cferr2;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_hf;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_lfstats1;   //!
+   TBranch        *b_bPogSF_CSVreshape_down_lfstats2;   //!
+   TBranch        *b_iRunPeriod;   //!
+   TBranch        *b_puW;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2016_Up;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2016_Down;   //!
+   TBranch        *b_std_vector_muon_idisoW_cut_Tight80x_Down;   //!
+   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X;   //!
+   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_Down;   //!
+   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_SS;   //!
+   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_Syst;   //!
+   TBranch        *b_std_vector_lepton_recoW_Up;   //!
+   TBranch        *b_std_vector_lepton_recoW_Down;   //!
+   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_Up;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2016_Up;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2015;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2016;   //!
+   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2016_Down;   //!
+   TBranch        *b_std_vector_muon_idisoW_cut_Tight80x;   //!
+   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2015_Up;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2015;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2015_Syst;   //!
+   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2015_Down;   //!
+   TBranch        *b_std_vector_muon_idisoW_cut_Tight80x_Syst;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2015_Syst;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2016_Syst;   //!
+   TBranch        *b_std_vector_lepton_recoW;   //!
+   TBranch        *b_std_vector_muon_idisoW_cut_Tight80x_Up;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2015_Up;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2016;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2016_Syst;   //!
+   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2015_Down;   //!
    TBranch        *b_pTWW;   //!
    TBranch        *b_mcoll;   //!
+   //TBranch        *b_mT2;   //!
    TBranch        *b_m2ljj30;   //!
    TBranch        *b_mcollWW;   //!
    TBranch        *b_dphilep2jet2;   //!
@@ -1478,147 +1638,6 @@ public :
    TBranch        *b_zbDeltaR_zh4l;   //!
    TBranch        *b_dymvaggh;   //!
    TBranch        *b_dymvavbf;   //!
-   TBranch        *b_iRunPeriod;   //!
-   TBranch        *b_puW;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2016_Up;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2016_Down;   //!
-   TBranch        *b_std_vector_muon_idisoW_cut_Tight80x_Down;   //!
-   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X;   //!
-   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_Down;   //!
-   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_SS;   //!
-   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_Syst;   //!
-   TBranch        *b_std_vector_lepton_recoW_Up;   //!
-   TBranch        *b_std_vector_lepton_recoW_Down;   //!
-   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_Up;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2016_Up;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2015;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2016;   //!
-   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2016_Down;   //!
-   TBranch        *b_std_vector_muon_idisoW_cut_Tight80x;   //!
-   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2015_Up;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2015;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2015_Syst;   //!
-   TBranch        *b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2015_Down;   //!
-   TBranch        *b_std_vector_muon_idisoW_cut_Tight80x_Syst;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2015_Syst;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2016_Syst;   //!
-   TBranch        *b_std_vector_lepton_recoW;   //!
-   TBranch        *b_std_vector_muon_idisoW_cut_Tight80x_Up;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2015_Up;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2016;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_80p_Iso2016_Syst;   //!
-   TBranch        *b_std_vector_electron_idisoW_mva_90p_Iso2015_Down;   //!
-   TBranch        *b_Xsec;   //!
-   TBranch        *b_baseW;   //!
-   TBranch        *b_bPogSF_CMVAL;   //!
-   TBranch        *b_bPogSF_CMVAL_up;   //!
-   TBranch        *b_bPogSF_CMVAL_udsg_up;   //!
-   TBranch        *b_bPogSF_CMVAL_bc_up;   //!
-   TBranch        *b_bPogSF_CMVAL_down;   //!
-   TBranch        *b_bPogSF_CMVAL_udsg_down;   //!
-   TBranch        *b_bPogSF_CMVAL_bc_down;   //!
-   TBranch        *b_bPogSF_CMVAM;   //!
-   TBranch        *b_bPogSF_CMVAM_up;   //!
-   TBranch        *b_bPogSF_CMVAM_udsg_up;   //!
-   TBranch        *b_bPogSF_CMVAM_bc_up;   //!
-   TBranch        *b_bPogSF_CMVAM_down;   //!
-   TBranch        *b_bPogSF_CMVAM_udsg_down;   //!
-   TBranch        *b_bPogSF_CMVAM_bc_down;   //!
-   TBranch        *b_bPogSF_CMVAT;   //!
-   TBranch        *b_bPogSF_CMVAT_up;   //!
-   TBranch        *b_bPogSF_CMVAT_udsg_up;   //!
-   TBranch        *b_bPogSF_CMVAT_bc_up;   //!
-   TBranch        *b_bPogSF_CMVAT_down;   //!
-   TBranch        *b_bPogSF_CMVAT_udsg_down;   //!
-   TBranch        *b_bPogSF_CMVAT_bc_down;   //!
-   TBranch        *b_bPogSF_CSVL;   //!
-   TBranch        *b_bPogSF_CSVL_up;   //!
-   TBranch        *b_bPogSF_CSVL_udsg_up;   //!
-   TBranch        *b_bPogSF_CSVL_bc_up;   //!
-   TBranch        *b_bPogSF_CSVL_down;   //!
-   TBranch        *b_bPogSF_CSVL_udsg_down;   //!
-   TBranch        *b_bPogSF_CSVL_bc_down;   //!
-   TBranch        *b_bPogSF_CSVM;   //!
-   TBranch        *b_bPogSF_CSVM_up;   //!
-   TBranch        *b_bPogSF_CSVM_udsg_up;   //!
-   TBranch        *b_bPogSF_CSVM_bc_up;   //!
-   TBranch        *b_bPogSF_CSVM_down;   //!
-   TBranch        *b_bPogSF_CSVM_udsg_down;   //!
-   TBranch        *b_bPogSF_CSVM_bc_down;   //!
-   TBranch        *b_bPogSF_CSVT;   //!
-   TBranch        *b_bPogSF_CSVT_up;   //!
-   TBranch        *b_bPogSF_CSVT_udsg_up;   //!
-   TBranch        *b_bPogSF_CSVT_bc_up;   //!
-   TBranch        *b_bPogSF_CSVT_down;   //!
-   TBranch        *b_bPogSF_CSVT_udsg_down;   //!
-   TBranch        *b_bPogSF_CSVT_bc_down;   //!
-   TBranch        *b_bPogSF_deepCSVL;   //!
-   TBranch        *b_bPogSF_deepCSVL_up;   //!
-   TBranch        *b_bPogSF_deepCSVL_udsg_up;   //!
-   TBranch        *b_bPogSF_deepCSVL_bc_up;   //!
-   TBranch        *b_bPogSF_deepCSVL_down;   //!
-   TBranch        *b_bPogSF_deepCSVL_udsg_down;   //!
-   TBranch        *b_bPogSF_deepCSVL_bc_down;   //!
-   TBranch        *b_bPogSF_deepCSVM;   //!
-   TBranch        *b_bPogSF_deepCSVM_up;   //!
-   TBranch        *b_bPogSF_deepCSVM_udsg_up;   //!
-   TBranch        *b_bPogSF_deepCSVM_bc_up;   //!
-   TBranch        *b_bPogSF_deepCSVM_down;   //!
-   TBranch        *b_bPogSF_deepCSVM_udsg_down;   //!
-   TBranch        *b_bPogSF_deepCSVM_bc_down;   //!
-   TBranch        *b_bPogSF_deepCSVT;   //!
-   TBranch        *b_bPogSF_deepCSVT_up;   //!
-   TBranch        *b_bPogSF_deepCSVT_udsg_up;   //!
-   TBranch        *b_bPogSF_deepCSVT_bc_up;   //!
-   TBranch        *b_bPogSF_deepCSVT_down;   //!
-   TBranch        *b_bPogSF_deepCSVT_udsg_down;   //!
-   TBranch        *b_bPogSF_deepCSVT_bc_down;   //!
-   TBranch        *b_bPogSF;   //!
-   TBranch        *b_bPogSFUp;   //!
-   TBranch        *b_bPogSFDown;   //!
-   TBranch        *b_bPogSF_CMVAreshape;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_jes;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_lf;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_hfstats1;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_hfstats2;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_cferr1;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_cferr2;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_hf;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_lfstats1;   //!
-   TBranch        *b_bPogSF_CMVAreshape_up_lfstats2;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_jes;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_lf;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_hfstats1;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_hfstats2;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_cferr1;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_cferr2;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_hf;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_lfstats1;   //!
-   TBranch        *b_bPogSF_CMVAreshape_down_lfstats2;   //!
-   TBranch        *b_bPogSF_CSVreshape;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_jes;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_lf;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_hfstats1;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_hfstats2;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_cferr1;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_cferr2;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_hf;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_lfstats1;   //!
-   TBranch        *b_bPogSF_CSVreshape_up_lfstats2;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_jes;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_lf;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_hfstats1;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_hfstats2;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_cferr1;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_cferr2;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_hf;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_lfstats1;   //!
-   TBranch        *b_bPogSF_CSVreshape_down_lfstats2;   //!
-   TBranch        *b_std_vector_lepton_genmatched;   //!
-   TBranch        *b_std_vector_lepton_promptgenmatched;   //!
    TBranch        *b_std_vector_tau_SF;   //!
    TBranch        *b_std_vector_tau_SF_Up;   //!
    TBranch        *b_std_vector_tau_SF_Down;   //!
@@ -1801,6 +1820,7 @@ public :
    virtual TList  *GetOutputList() const { return fOutput; }
    virtual void    SlaveTerminate();
    virtual void    Terminate();
+   virtual void    CopyVariables();
 
    ClassDef(myselector,0);
 };
@@ -1992,6 +2012,7 @@ void myselector::Init(TTree *tree)
    std_vector_lepton_photonIso = 0;
    std_vector_lepton_closejet_eta = 0;
    std_vector_lepton_closejet_PartonFlavour = 0;
+   std_vector_lepton_genmatched = 0;
    std_vector_lepton_eleIdMvaWp90 = 0;
    std_vector_lepton_chargedHadronMiniIso = 0;
    std_vector_lepton_closejet_pt = 0;
@@ -2023,6 +2044,7 @@ void myselector::Init(TTree *tree)
    std_vector_lepton_eleIdHLT = 0;
    std_vector_lepton_ch = 0;
    std_vector_lepton_flavour = 0;
+   std_vector_lepton_promptgenmatched = 0;
    std_vector_lepton_closejet_drlj = 0;
    std_vector_lepton_eleIdTight = 0;
    std_vector_lepton_eleIdMvaValue = 0;
@@ -2060,8 +2082,6 @@ void myselector::Init(TTree *tree)
    std_vector_electron_idisoW_mva_80p_Iso2016 = 0;
    std_vector_electron_idisoW_mva_80p_Iso2016_Syst = 0;
    std_vector_electron_idisoW_mva_90p_Iso2015_Down = 0;
-   std_vector_lepton_genmatched = 0;
-   std_vector_lepton_promptgenmatched = 0;
    std_vector_tau_SF = 0;
    std_vector_tau_SF_Up = 0;
    std_vector_tau_SF_Down = 0;
@@ -2104,15 +2124,6 @@ void myselector::Init(TTree *tree)
    if (!tree) return;
    fChain = tree;
    fChain->SetMakeClass(1);
-
-   /*fChain->SetBranchAddress("LHE_mlvlv", &LHE_mlvlv, &b_LHE_mlvlv);     //Branches aggiunti da me
-   fChain->SetBranchAddress("LHE_mlvlv_t", &LHE_mlvlv_t, &b_LHE_mlvlv_t);     //Branches aggiunti da me
-   fChain->SetBranchAddress("LHE_mllmet", &LHE_mllmet, &b_LHE_mllmet);
-   fChain->SetBranchAddress("LHE_mll", &LHE_mll, &b_LHE_mll);
-   fChain->SetBranchAddress("LHE_theta", &LHE_theta, &b_LHE_theta);
-   fChain->SetBranchAddress("LHE_dphill", &LHE_dphill, &b_LHE_dphill);
-   fChain->SetBranchAddress("LHE_dphilmet1", &LHE_dphilmet1, &b_LHE_dphilmet1);
-   fChain->SetBranchAddress("LHE_dphilmet2", &LHE_dphilmet2, &b_LHE_dphilmet2);*/
 
    fChain->SetBranchAddress("GEN_weight_SM", &GEN_weight_SM, &b_GEN_weight_SM);
    fChain->SetBranchAddress("Gen_ZGstar_MomId", &Gen_ZGstar_MomId, &b_Gen_ZGstar_MomId);
@@ -2396,6 +2407,8 @@ void myselector::Init(TTree *tree)
    fChain->SetBranchAddress("run", &run, &b_run);
    fChain->SetBranchAddress("lumi", &lumi, &b_lumi);
    fChain->SetBranchAddress("event", &event, &b_event);
+   fChain->SetBranchAddress("Xsec", &Xsec, &b_Xsec);
+   fChain->SetBranchAddress("baseW", &baseW, &b_baseW);
    fChain->SetBranchAddress("std_vector_electron_isTightLepton_cut_WP_Tight80X_SS", &std_vector_electron_isTightLepton_cut_WP_Tight80X_SS, &b_std_vector_electron_isTightLepton_cut_WP_Tight80X_SS);
    fChain->SetBranchAddress("std_vector_vetolepton_flavour", &std_vector_vetolepton_flavour, &b_std_vector_vetolepton_flavour);
    fChain->SetBranchAddress("std_vector_electron_isTightLepton_mva_90p_Iso2016", &std_vector_electron_isTightLepton_mva_90p_Iso2016, &b_std_vector_electron_isTightLepton_mva_90p_Iso2016);
@@ -2499,6 +2512,7 @@ void myselector::Init(TTree *tree)
    fChain->SetBranchAddress("std_vector_lepton_photonIso", &std_vector_lepton_photonIso, &b_std_vector_lepton_photonIso);
    fChain->SetBranchAddress("std_vector_lepton_closejet_eta", &std_vector_lepton_closejet_eta, &b_std_vector_lepton_closejet_eta);
    fChain->SetBranchAddress("std_vector_lepton_closejet_PartonFlavour", &std_vector_lepton_closejet_PartonFlavour, &b_std_vector_lepton_closejet_PartonFlavour);
+   fChain->SetBranchAddress("std_vector_lepton_genmatched", &std_vector_lepton_genmatched, &b_std_vector_lepton_genmatched);
    fChain->SetBranchAddress("std_vector_lepton_eleIdMvaWp90", &std_vector_lepton_eleIdMvaWp90, &b_std_vector_lepton_eleIdMvaWp90);
    fChain->SetBranchAddress("std_vector_lepton_chargedHadronMiniIso", &std_vector_lepton_chargedHadronMiniIso, &b_std_vector_lepton_chargedHadronMiniIso);
    fChain->SetBranchAddress("std_vector_lepton_closejet_pt", &std_vector_lepton_closejet_pt, &b_std_vector_lepton_closejet_pt);
@@ -2530,6 +2544,7 @@ void myselector::Init(TTree *tree)
    fChain->SetBranchAddress("std_vector_lepton_eleIdHLT", &std_vector_lepton_eleIdHLT, &b_std_vector_lepton_eleIdHLT);
    fChain->SetBranchAddress("std_vector_lepton_ch", &std_vector_lepton_ch, &b_std_vector_lepton_ch);
    fChain->SetBranchAddress("std_vector_lepton_flavour", &std_vector_lepton_flavour, &b_std_vector_lepton_flavour);
+   fChain->SetBranchAddress("std_vector_lepton_promptgenmatched", &std_vector_lepton_promptgenmatched, &b_std_vector_lepton_promptgenmatched);
    fChain->SetBranchAddress("std_vector_lepton_closejet_drlj", &std_vector_lepton_closejet_drlj, &b_std_vector_lepton_closejet_drlj);
    fChain->SetBranchAddress("std_vector_lepton_eleIdTight", &std_vector_lepton_eleIdTight, &b_std_vector_lepton_eleIdTight);
    fChain->SetBranchAddress("std_vector_lepton_eleIdMvaValue", &std_vector_lepton_eleIdMvaValue, &b_std_vector_lepton_eleIdMvaValue);
@@ -2538,8 +2553,146 @@ void myselector::Init(TTree *tree)
    fChain->SetBranchAddress("std_vector_lepton_isTightMuon", &std_vector_lepton_isTightMuon, &b_std_vector_lepton_isTightMuon);
    fChain->SetBranchAddress("metPfType1Phi", &metPfType1Phi, &b_metPfType1Phi);
    fChain->SetBranchAddress("metPfType1", &metPfType1, &b_metPfType1);
+   fChain->SetBranchAddress("bPogSF_CMVAL", &bPogSF_CMVAL, &b_bPogSF_CMVAL);
+   fChain->SetBranchAddress("bPogSF_CMVAL_up", &bPogSF_CMVAL_up, &b_bPogSF_CMVAL_up);
+   fChain->SetBranchAddress("bPogSF_CMVAL_udsg_up", &bPogSF_CMVAL_udsg_up, &b_bPogSF_CMVAL_udsg_up);
+   fChain->SetBranchAddress("bPogSF_CMVAL_bc_up", &bPogSF_CMVAL_bc_up, &b_bPogSF_CMVAL_bc_up);
+   fChain->SetBranchAddress("bPogSF_CMVAL_down", &bPogSF_CMVAL_down, &b_bPogSF_CMVAL_down);
+   fChain->SetBranchAddress("bPogSF_CMVAL_udsg_down", &bPogSF_CMVAL_udsg_down, &b_bPogSF_CMVAL_udsg_down);
+   fChain->SetBranchAddress("bPogSF_CMVAL_bc_down", &bPogSF_CMVAL_bc_down, &b_bPogSF_CMVAL_bc_down);
+   fChain->SetBranchAddress("bPogSF_CMVAM", &bPogSF_CMVAM, &b_bPogSF_CMVAM);
+   fChain->SetBranchAddress("bPogSF_CMVAM_up", &bPogSF_CMVAM_up, &b_bPogSF_CMVAM_up);
+   fChain->SetBranchAddress("bPogSF_CMVAM_udsg_up", &bPogSF_CMVAM_udsg_up, &b_bPogSF_CMVAM_udsg_up);
+   fChain->SetBranchAddress("bPogSF_CMVAM_bc_up", &bPogSF_CMVAM_bc_up, &b_bPogSF_CMVAM_bc_up);
+   fChain->SetBranchAddress("bPogSF_CMVAM_down", &bPogSF_CMVAM_down, &b_bPogSF_CMVAM_down);
+   fChain->SetBranchAddress("bPogSF_CMVAM_udsg_down", &bPogSF_CMVAM_udsg_down, &b_bPogSF_CMVAM_udsg_down);
+   fChain->SetBranchAddress("bPogSF_CMVAM_bc_down", &bPogSF_CMVAM_bc_down, &b_bPogSF_CMVAM_bc_down);
+   fChain->SetBranchAddress("bPogSF_CMVAT", &bPogSF_CMVAT, &b_bPogSF_CMVAT);
+   fChain->SetBranchAddress("bPogSF_CMVAT_up", &bPogSF_CMVAT_up, &b_bPogSF_CMVAT_up);
+   fChain->SetBranchAddress("bPogSF_CMVAT_udsg_up", &bPogSF_CMVAT_udsg_up, &b_bPogSF_CMVAT_udsg_up);
+   fChain->SetBranchAddress("bPogSF_CMVAT_bc_up", &bPogSF_CMVAT_bc_up, &b_bPogSF_CMVAT_bc_up);
+   fChain->SetBranchAddress("bPogSF_CMVAT_down", &bPogSF_CMVAT_down, &b_bPogSF_CMVAT_down);
+   fChain->SetBranchAddress("bPogSF_CMVAT_udsg_down", &bPogSF_CMVAT_udsg_down, &b_bPogSF_CMVAT_udsg_down);
+   fChain->SetBranchAddress("bPogSF_CMVAT_bc_down", &bPogSF_CMVAT_bc_down, &b_bPogSF_CMVAT_bc_down);
+   fChain->SetBranchAddress("bPogSF_CSVL", &bPogSF_CSVL, &b_bPogSF_CSVL);
+   fChain->SetBranchAddress("bPogSF_CSVL_up", &bPogSF_CSVL_up, &b_bPogSF_CSVL_up);
+   fChain->SetBranchAddress("bPogSF_CSVL_udsg_up", &bPogSF_CSVL_udsg_up, &b_bPogSF_CSVL_udsg_up);
+   fChain->SetBranchAddress("bPogSF_CSVL_bc_up", &bPogSF_CSVL_bc_up, &b_bPogSF_CSVL_bc_up);
+   fChain->SetBranchAddress("bPogSF_CSVL_down", &bPogSF_CSVL_down, &b_bPogSF_CSVL_down);
+   fChain->SetBranchAddress("bPogSF_CSVL_udsg_down", &bPogSF_CSVL_udsg_down, &b_bPogSF_CSVL_udsg_down);
+   fChain->SetBranchAddress("bPogSF_CSVL_bc_down", &bPogSF_CSVL_bc_down, &b_bPogSF_CSVL_bc_down);
+   fChain->SetBranchAddress("bPogSF_CSVM", &bPogSF_CSVM, &b_bPogSF_CSVM);
+   fChain->SetBranchAddress("bPogSF_CSVM_up", &bPogSF_CSVM_up, &b_bPogSF_CSVM_up);
+   fChain->SetBranchAddress("bPogSF_CSVM_udsg_up", &bPogSF_CSVM_udsg_up, &b_bPogSF_CSVM_udsg_up);
+   fChain->SetBranchAddress("bPogSF_CSVM_bc_up", &bPogSF_CSVM_bc_up, &b_bPogSF_CSVM_bc_up);
+   fChain->SetBranchAddress("bPogSF_CSVM_down", &bPogSF_CSVM_down, &b_bPogSF_CSVM_down);
+   fChain->SetBranchAddress("bPogSF_CSVM_udsg_down", &bPogSF_CSVM_udsg_down, &b_bPogSF_CSVM_udsg_down);
+   fChain->SetBranchAddress("bPogSF_CSVM_bc_down", &bPogSF_CSVM_bc_down, &b_bPogSF_CSVM_bc_down);
+   fChain->SetBranchAddress("bPogSF_CSVT", &bPogSF_CSVT, &b_bPogSF_CSVT);
+   fChain->SetBranchAddress("bPogSF_CSVT_up", &bPogSF_CSVT_up, &b_bPogSF_CSVT_up);
+   fChain->SetBranchAddress("bPogSF_CSVT_udsg_up", &bPogSF_CSVT_udsg_up, &b_bPogSF_CSVT_udsg_up);
+   fChain->SetBranchAddress("bPogSF_CSVT_bc_up", &bPogSF_CSVT_bc_up, &b_bPogSF_CSVT_bc_up);
+   fChain->SetBranchAddress("bPogSF_CSVT_down", &bPogSF_CSVT_down, &b_bPogSF_CSVT_down);
+   fChain->SetBranchAddress("bPogSF_CSVT_udsg_down", &bPogSF_CSVT_udsg_down, &b_bPogSF_CSVT_udsg_down);
+   fChain->SetBranchAddress("bPogSF_CSVT_bc_down", &bPogSF_CSVT_bc_down, &b_bPogSF_CSVT_bc_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVL", &bPogSF_deepCSVL, &b_bPogSF_deepCSVL);
+   fChain->SetBranchAddress("bPogSF_deepCSVL_up", &bPogSF_deepCSVL_up, &b_bPogSF_deepCSVL_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVL_udsg_up", &bPogSF_deepCSVL_udsg_up, &b_bPogSF_deepCSVL_udsg_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVL_bc_up", &bPogSF_deepCSVL_bc_up, &b_bPogSF_deepCSVL_bc_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVL_down", &bPogSF_deepCSVL_down, &b_bPogSF_deepCSVL_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVL_udsg_down", &bPogSF_deepCSVL_udsg_down, &b_bPogSF_deepCSVL_udsg_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVL_bc_down", &bPogSF_deepCSVL_bc_down, &b_bPogSF_deepCSVL_bc_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVM", &bPogSF_deepCSVM, &b_bPogSF_deepCSVM);
+   fChain->SetBranchAddress("bPogSF_deepCSVM_up", &bPogSF_deepCSVM_up, &b_bPogSF_deepCSVM_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVM_udsg_up", &bPogSF_deepCSVM_udsg_up, &b_bPogSF_deepCSVM_udsg_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVM_bc_up", &bPogSF_deepCSVM_bc_up, &b_bPogSF_deepCSVM_bc_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVM_down", &bPogSF_deepCSVM_down, &b_bPogSF_deepCSVM_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVM_udsg_down", &bPogSF_deepCSVM_udsg_down, &b_bPogSF_deepCSVM_udsg_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVM_bc_down", &bPogSF_deepCSVM_bc_down, &b_bPogSF_deepCSVM_bc_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVT", &bPogSF_deepCSVT, &b_bPogSF_deepCSVT);
+   fChain->SetBranchAddress("bPogSF_deepCSVT_up", &bPogSF_deepCSVT_up, &b_bPogSF_deepCSVT_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVT_udsg_up", &bPogSF_deepCSVT_udsg_up, &b_bPogSF_deepCSVT_udsg_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVT_bc_up", &bPogSF_deepCSVT_bc_up, &b_bPogSF_deepCSVT_bc_up);
+   fChain->SetBranchAddress("bPogSF_deepCSVT_down", &bPogSF_deepCSVT_down, &b_bPogSF_deepCSVT_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVT_udsg_down", &bPogSF_deepCSVT_udsg_down, &b_bPogSF_deepCSVT_udsg_down);
+   fChain->SetBranchAddress("bPogSF_deepCSVT_bc_down", &bPogSF_deepCSVT_bc_down, &b_bPogSF_deepCSVT_bc_down);
+   fChain->SetBranchAddress("bPogSF", &bPogSF, &b_bPogSF);
+   fChain->SetBranchAddress("bPogSFUp", &bPogSFUp, &b_bPogSFUp);
+   fChain->SetBranchAddress("bPogSFDown", &bPogSFDown, &b_bPogSFDown);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape", &bPogSF_CMVAreshape, &b_bPogSF_CMVAreshape);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_jes", &bPogSF_CMVAreshape_up_jes, &b_bPogSF_CMVAreshape_up_jes);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_lf", &bPogSF_CMVAreshape_up_lf, &b_bPogSF_CMVAreshape_up_lf);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_hfstats1", &bPogSF_CMVAreshape_up_hfstats1, &b_bPogSF_CMVAreshape_up_hfstats1);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_hfstats2", &bPogSF_CMVAreshape_up_hfstats2, &b_bPogSF_CMVAreshape_up_hfstats2);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_cferr1", &bPogSF_CMVAreshape_up_cferr1, &b_bPogSF_CMVAreshape_up_cferr1);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_cferr2", &bPogSF_CMVAreshape_up_cferr2, &b_bPogSF_CMVAreshape_up_cferr2);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_hf", &bPogSF_CMVAreshape_up_hf, &b_bPogSF_CMVAreshape_up_hf);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_lfstats1", &bPogSF_CMVAreshape_up_lfstats1, &b_bPogSF_CMVAreshape_up_lfstats1);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_lfstats2", &bPogSF_CMVAreshape_up_lfstats2, &b_bPogSF_CMVAreshape_up_lfstats2);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_jes", &bPogSF_CMVAreshape_down_jes, &b_bPogSF_CMVAreshape_down_jes);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_lf", &bPogSF_CMVAreshape_down_lf, &b_bPogSF_CMVAreshape_down_lf);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_hfstats1", &bPogSF_CMVAreshape_down_hfstats1, &b_bPogSF_CMVAreshape_down_hfstats1);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_hfstats2", &bPogSF_CMVAreshape_down_hfstats2, &b_bPogSF_CMVAreshape_down_hfstats2);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_cferr1", &bPogSF_CMVAreshape_down_cferr1, &b_bPogSF_CMVAreshape_down_cferr1);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_cferr2", &bPogSF_CMVAreshape_down_cferr2, &b_bPogSF_CMVAreshape_down_cferr2);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_hf", &bPogSF_CMVAreshape_down_hf, &b_bPogSF_CMVAreshape_down_hf);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_lfstats1", &bPogSF_CMVAreshape_down_lfstats1, &b_bPogSF_CMVAreshape_down_lfstats1);
+   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_lfstats2", &bPogSF_CMVAreshape_down_lfstats2, &b_bPogSF_CMVAreshape_down_lfstats2);
+   fChain->SetBranchAddress("bPogSF_CSVreshape", &bPogSF_CSVreshape, &b_bPogSF_CSVreshape);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_jes", &bPogSF_CSVreshape_up_jes, &b_bPogSF_CSVreshape_up_jes);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_lf", &bPogSF_CSVreshape_up_lf, &b_bPogSF_CSVreshape_up_lf);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_hfstats1", &bPogSF_CSVreshape_up_hfstats1, &b_bPogSF_CSVreshape_up_hfstats1);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_hfstats2", &bPogSF_CSVreshape_up_hfstats2, &b_bPogSF_CSVreshape_up_hfstats2);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_cferr1", &bPogSF_CSVreshape_up_cferr1, &b_bPogSF_CSVreshape_up_cferr1);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_cferr2", &bPogSF_CSVreshape_up_cferr2, &b_bPogSF_CSVreshape_up_cferr2);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_hf", &bPogSF_CSVreshape_up_hf, &b_bPogSF_CSVreshape_up_hf);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_lfstats1", &bPogSF_CSVreshape_up_lfstats1, &b_bPogSF_CSVreshape_up_lfstats1);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_up_lfstats2", &bPogSF_CSVreshape_up_lfstats2, &b_bPogSF_CSVreshape_up_lfstats2);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_jes", &bPogSF_CSVreshape_down_jes, &b_bPogSF_CSVreshape_down_jes);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_lf", &bPogSF_CSVreshape_down_lf, &b_bPogSF_CSVreshape_down_lf);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_hfstats1", &bPogSF_CSVreshape_down_hfstats1, &b_bPogSF_CSVreshape_down_hfstats1);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_hfstats2", &bPogSF_CSVreshape_down_hfstats2, &b_bPogSF_CSVreshape_down_hfstats2);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_cferr1", &bPogSF_CSVreshape_down_cferr1, &b_bPogSF_CSVreshape_down_cferr1);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_cferr2", &bPogSF_CSVreshape_down_cferr2, &b_bPogSF_CSVreshape_down_cferr2);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_hf", &bPogSF_CSVreshape_down_hf, &b_bPogSF_CSVreshape_down_hf);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_lfstats1", &bPogSF_CSVreshape_down_lfstats1, &b_bPogSF_CSVreshape_down_lfstats1);
+   fChain->SetBranchAddress("bPogSF_CSVreshape_down_lfstats2", &bPogSF_CSVreshape_down_lfstats2, &b_bPogSF_CSVreshape_down_lfstats2);
+   fChain->SetBranchAddress("iRunPeriod", &iRunPeriod, &b_iRunPeriod);
+   fChain->SetBranchAddress("puW", &puW, &b_puW);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2016_Up", &std_vector_electron_idisoW_mva_80p_Iso2016_Up, &b_std_vector_electron_idisoW_mva_80p_Iso2016_Up);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2016_Down", &std_vector_electron_idisoW_mva_80p_Iso2016_Down, &b_std_vector_electron_idisoW_mva_80p_Iso2016_Down);
+   fChain->SetBranchAddress("std_vector_muon_idisoW_cut_Tight80x_Down", &std_vector_muon_idisoW_cut_Tight80x_Down, &b_std_vector_muon_idisoW_cut_Tight80x_Down);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X", &std_vector_electron_idisoW_cut_WP_Tight80X, &b_std_vector_electron_idisoW_cut_WP_Tight80X);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_Down", &std_vector_electron_idisoW_cut_WP_Tight80X_Down, &b_std_vector_electron_idisoW_cut_WP_Tight80X_Down);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_SS", &std_vector_electron_idisoW_cut_WP_Tight80X_SS, &b_std_vector_electron_idisoW_cut_WP_Tight80X_SS);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_Syst", &std_vector_electron_idisoW_cut_WP_Tight80X_Syst, &b_std_vector_electron_idisoW_cut_WP_Tight80X_Syst);
+   fChain->SetBranchAddress("std_vector_lepton_recoW_Up", &std_vector_lepton_recoW_Up, &b_std_vector_lepton_recoW_Up);
+   fChain->SetBranchAddress("std_vector_lepton_recoW_Down", &std_vector_lepton_recoW_Down, &b_std_vector_lepton_recoW_Down);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_Up", &std_vector_electron_idisoW_cut_WP_Tight80X_Up, &b_std_vector_electron_idisoW_cut_WP_Tight80X_Up);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2016_Up", &std_vector_electron_idisoW_mva_90p_Iso2016_Up, &b_std_vector_electron_idisoW_mva_90p_Iso2016_Up);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2015", &std_vector_electron_idisoW_mva_90p_Iso2015, &b_std_vector_electron_idisoW_mva_90p_Iso2015);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2016", &std_vector_electron_idisoW_mva_90p_Iso2016, &b_std_vector_electron_idisoW_mva_90p_Iso2016);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down", &std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down, &b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2016_Down", &std_vector_electron_idisoW_mva_90p_Iso2016_Down, &b_std_vector_electron_idisoW_mva_90p_Iso2016_Down);
+   fChain->SetBranchAddress("std_vector_muon_idisoW_cut_Tight80x", &std_vector_muon_idisoW_cut_Tight80x, &b_std_vector_muon_idisoW_cut_Tight80x);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up", &std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up, &b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2015_Up", &std_vector_electron_idisoW_mva_80p_Iso2015_Up, &b_std_vector_electron_idisoW_mva_80p_Iso2015_Up);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2015", &std_vector_electron_idisoW_mva_80p_Iso2015, &b_std_vector_electron_idisoW_mva_80p_Iso2015);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2015_Syst", &std_vector_electron_idisoW_mva_80p_Iso2015_Syst, &b_std_vector_electron_idisoW_mva_80p_Iso2015_Syst);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst", &std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst, &b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2015_Down", &std_vector_electron_idisoW_mva_80p_Iso2015_Down, &b_std_vector_electron_idisoW_mva_80p_Iso2015_Down);
+   fChain->SetBranchAddress("std_vector_muon_idisoW_cut_Tight80x_Syst", &std_vector_muon_idisoW_cut_Tight80x_Syst, &b_std_vector_muon_idisoW_cut_Tight80x_Syst);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2015_Syst", &std_vector_electron_idisoW_mva_90p_Iso2015_Syst, &b_std_vector_electron_idisoW_mva_90p_Iso2015_Syst);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2016_Syst", &std_vector_electron_idisoW_mva_90p_Iso2016_Syst, &b_std_vector_electron_idisoW_mva_90p_Iso2016_Syst);
+   fChain->SetBranchAddress("std_vector_lepton_recoW", &std_vector_lepton_recoW, &b_std_vector_lepton_recoW);
+   fChain->SetBranchAddress("std_vector_muon_idisoW_cut_Tight80x_Up", &std_vector_muon_idisoW_cut_Tight80x_Up, &b_std_vector_muon_idisoW_cut_Tight80x_Up);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2015_Up", &std_vector_electron_idisoW_mva_90p_Iso2015_Up, &b_std_vector_electron_idisoW_mva_90p_Iso2015_Up);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2016", &std_vector_electron_idisoW_mva_80p_Iso2016, &b_std_vector_electron_idisoW_mva_80p_Iso2016);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2016_Syst", &std_vector_electron_idisoW_mva_80p_Iso2016_Syst, &b_std_vector_electron_idisoW_mva_80p_Iso2016_Syst);
+   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2015_Down", &std_vector_electron_idisoW_mva_90p_Iso2015_Down, &b_std_vector_electron_idisoW_mva_90p_Iso2015_Down);
    fChain->SetBranchAddress("pTWW", &pTWW, &b_pTWW);
    fChain->SetBranchAddress("mcoll", &mcoll, &b_mcoll);
+   //fChain->SetBranchAddress("mT2", &mT2, &b_mT2);
    fChain->SetBranchAddress("m2ljj30", &m2ljj30, &b_m2ljj30);
    fChain->SetBranchAddress("mcollWW", &mcollWW, &b_mcollWW);
    fChain->SetBranchAddress("dphilep2jet2", &dphilep2jet2, &b_dphilep2jet2);
@@ -2652,147 +2805,6 @@ void myselector::Init(TTree *tree)
    fChain->SetBranchAddress("zbDeltaR_zh4l", &zbDeltaR_zh4l, &b_zbDeltaR_zh4l);
    fChain->SetBranchAddress("dymvaggh", &dymvaggh, &b_dymvaggh);
    fChain->SetBranchAddress("dymvavbf", &dymvavbf, &b_dymvavbf);
-   fChain->SetBranchAddress("iRunPeriod", &iRunPeriod, &b_iRunPeriod);
-   fChain->SetBranchAddress("puW", &puW, &b_puW);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2016_Up", &std_vector_electron_idisoW_mva_80p_Iso2016_Up, &b_std_vector_electron_idisoW_mva_80p_Iso2016_Up);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2016_Down", &std_vector_electron_idisoW_mva_80p_Iso2016_Down, &b_std_vector_electron_idisoW_mva_80p_Iso2016_Down);
-   fChain->SetBranchAddress("std_vector_muon_idisoW_cut_Tight80x_Down", &std_vector_muon_idisoW_cut_Tight80x_Down, &b_std_vector_muon_idisoW_cut_Tight80x_Down);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X", &std_vector_electron_idisoW_cut_WP_Tight80X, &b_std_vector_electron_idisoW_cut_WP_Tight80X);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_Down", &std_vector_electron_idisoW_cut_WP_Tight80X_Down, &b_std_vector_electron_idisoW_cut_WP_Tight80X_Down);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_SS", &std_vector_electron_idisoW_cut_WP_Tight80X_SS, &b_std_vector_electron_idisoW_cut_WP_Tight80X_SS);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_Syst", &std_vector_electron_idisoW_cut_WP_Tight80X_Syst, &b_std_vector_electron_idisoW_cut_WP_Tight80X_Syst);
-   fChain->SetBranchAddress("std_vector_lepton_recoW_Up", &std_vector_lepton_recoW_Up, &b_std_vector_lepton_recoW_Up);
-   fChain->SetBranchAddress("std_vector_lepton_recoW_Down", &std_vector_lepton_recoW_Down, &b_std_vector_lepton_recoW_Down);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_Up", &std_vector_electron_idisoW_cut_WP_Tight80X_Up, &b_std_vector_electron_idisoW_cut_WP_Tight80X_Up);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2016_Up", &std_vector_electron_idisoW_mva_90p_Iso2016_Up, &b_std_vector_electron_idisoW_mva_90p_Iso2016_Up);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2015", &std_vector_electron_idisoW_mva_90p_Iso2015, &b_std_vector_electron_idisoW_mva_90p_Iso2015);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2016", &std_vector_electron_idisoW_mva_90p_Iso2016, &b_std_vector_electron_idisoW_mva_90p_Iso2016);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down", &std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down, &b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Down);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2016_Down", &std_vector_electron_idisoW_mva_90p_Iso2016_Down, &b_std_vector_electron_idisoW_mva_90p_Iso2016_Down);
-   fChain->SetBranchAddress("std_vector_muon_idisoW_cut_Tight80x", &std_vector_muon_idisoW_cut_Tight80x, &b_std_vector_muon_idisoW_cut_Tight80x);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up", &std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up, &b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Up);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2015_Up", &std_vector_electron_idisoW_mva_80p_Iso2015_Up, &b_std_vector_electron_idisoW_mva_80p_Iso2015_Up);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2015", &std_vector_electron_idisoW_mva_80p_Iso2015, &b_std_vector_electron_idisoW_mva_80p_Iso2015);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2015_Syst", &std_vector_electron_idisoW_mva_80p_Iso2015_Syst, &b_std_vector_electron_idisoW_mva_80p_Iso2015_Syst);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst", &std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst, &b_std_vector_electron_idisoW_cut_WP_Tight80X_SS_Syst);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2015_Down", &std_vector_electron_idisoW_mva_80p_Iso2015_Down, &b_std_vector_electron_idisoW_mva_80p_Iso2015_Down);
-   fChain->SetBranchAddress("std_vector_muon_idisoW_cut_Tight80x_Syst", &std_vector_muon_idisoW_cut_Tight80x_Syst, &b_std_vector_muon_idisoW_cut_Tight80x_Syst);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2015_Syst", &std_vector_electron_idisoW_mva_90p_Iso2015_Syst, &b_std_vector_electron_idisoW_mva_90p_Iso2015_Syst);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2016_Syst", &std_vector_electron_idisoW_mva_90p_Iso2016_Syst, &b_std_vector_electron_idisoW_mva_90p_Iso2016_Syst);
-   fChain->SetBranchAddress("std_vector_lepton_recoW", &std_vector_lepton_recoW, &b_std_vector_lepton_recoW);
-   fChain->SetBranchAddress("std_vector_muon_idisoW_cut_Tight80x_Up", &std_vector_muon_idisoW_cut_Tight80x_Up, &b_std_vector_muon_idisoW_cut_Tight80x_Up);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2015_Up", &std_vector_electron_idisoW_mva_90p_Iso2015_Up, &b_std_vector_electron_idisoW_mva_90p_Iso2015_Up);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2016", &std_vector_electron_idisoW_mva_80p_Iso2016, &b_std_vector_electron_idisoW_mva_80p_Iso2016);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_80p_Iso2016_Syst", &std_vector_electron_idisoW_mva_80p_Iso2016_Syst, &b_std_vector_electron_idisoW_mva_80p_Iso2016_Syst);
-   fChain->SetBranchAddress("std_vector_electron_idisoW_mva_90p_Iso2015_Down", &std_vector_electron_idisoW_mva_90p_Iso2015_Down, &b_std_vector_electron_idisoW_mva_90p_Iso2015_Down);
-   fChain->SetBranchAddress("Xsec", &Xsec, &b_Xsec);
-   fChain->SetBranchAddress("baseW", &baseW, &b_baseW);
-   fChain->SetBranchAddress("bPogSF_CMVAL", &bPogSF_CMVAL, &b_bPogSF_CMVAL);
-   fChain->SetBranchAddress("bPogSF_CMVAL_up", &bPogSF_CMVAL_up, &b_bPogSF_CMVAL_up);
-   fChain->SetBranchAddress("bPogSF_CMVAL_udsg_up", &bPogSF_CMVAL_udsg_up, &b_bPogSF_CMVAL_udsg_up);
-   fChain->SetBranchAddress("bPogSF_CMVAL_bc_up", &bPogSF_CMVAL_bc_up, &b_bPogSF_CMVAL_bc_up);
-   fChain->SetBranchAddress("bPogSF_CMVAL_down", &bPogSF_CMVAL_down, &b_bPogSF_CMVAL_down);
-   fChain->SetBranchAddress("bPogSF_CMVAL_udsg_down", &bPogSF_CMVAL_udsg_down, &b_bPogSF_CMVAL_udsg_down);
-   fChain->SetBranchAddress("bPogSF_CMVAL_bc_down", &bPogSF_CMVAL_bc_down, &b_bPogSF_CMVAL_bc_down);
-   fChain->SetBranchAddress("bPogSF_CMVAM", &bPogSF_CMVAM, &b_bPogSF_CMVAM);
-   fChain->SetBranchAddress("bPogSF_CMVAM_up", &bPogSF_CMVAM_up, &b_bPogSF_CMVAM_up);
-   fChain->SetBranchAddress("bPogSF_CMVAM_udsg_up", &bPogSF_CMVAM_udsg_up, &b_bPogSF_CMVAM_udsg_up);
-   fChain->SetBranchAddress("bPogSF_CMVAM_bc_up", &bPogSF_CMVAM_bc_up, &b_bPogSF_CMVAM_bc_up);
-   fChain->SetBranchAddress("bPogSF_CMVAM_down", &bPogSF_CMVAM_down, &b_bPogSF_CMVAM_down);
-   fChain->SetBranchAddress("bPogSF_CMVAM_udsg_down", &bPogSF_CMVAM_udsg_down, &b_bPogSF_CMVAM_udsg_down);
-   fChain->SetBranchAddress("bPogSF_CMVAM_bc_down", &bPogSF_CMVAM_bc_down, &b_bPogSF_CMVAM_bc_down);
-   fChain->SetBranchAddress("bPogSF_CMVAT", &bPogSF_CMVAT, &b_bPogSF_CMVAT);
-   fChain->SetBranchAddress("bPogSF_CMVAT_up", &bPogSF_CMVAT_up, &b_bPogSF_CMVAT_up);
-   fChain->SetBranchAddress("bPogSF_CMVAT_udsg_up", &bPogSF_CMVAT_udsg_up, &b_bPogSF_CMVAT_udsg_up);
-   fChain->SetBranchAddress("bPogSF_CMVAT_bc_up", &bPogSF_CMVAT_bc_up, &b_bPogSF_CMVAT_bc_up);
-   fChain->SetBranchAddress("bPogSF_CMVAT_down", &bPogSF_CMVAT_down, &b_bPogSF_CMVAT_down);
-   fChain->SetBranchAddress("bPogSF_CMVAT_udsg_down", &bPogSF_CMVAT_udsg_down, &b_bPogSF_CMVAT_udsg_down);
-   fChain->SetBranchAddress("bPogSF_CMVAT_bc_down", &bPogSF_CMVAT_bc_down, &b_bPogSF_CMVAT_bc_down);
-   fChain->SetBranchAddress("bPogSF_CSVL", &bPogSF_CSVL, &b_bPogSF_CSVL);
-   fChain->SetBranchAddress("bPogSF_CSVL_up", &bPogSF_CSVL_up, &b_bPogSF_CSVL_up);
-   fChain->SetBranchAddress("bPogSF_CSVL_udsg_up", &bPogSF_CSVL_udsg_up, &b_bPogSF_CSVL_udsg_up);
-   fChain->SetBranchAddress("bPogSF_CSVL_bc_up", &bPogSF_CSVL_bc_up, &b_bPogSF_CSVL_bc_up);
-   fChain->SetBranchAddress("bPogSF_CSVL_down", &bPogSF_CSVL_down, &b_bPogSF_CSVL_down);
-   fChain->SetBranchAddress("bPogSF_CSVL_udsg_down", &bPogSF_CSVL_udsg_down, &b_bPogSF_CSVL_udsg_down);
-   fChain->SetBranchAddress("bPogSF_CSVL_bc_down", &bPogSF_CSVL_bc_down, &b_bPogSF_CSVL_bc_down);
-   fChain->SetBranchAddress("bPogSF_CSVM", &bPogSF_CSVM, &b_bPogSF_CSVM);
-   fChain->SetBranchAddress("bPogSF_CSVM_up", &bPogSF_CSVM_up, &b_bPogSF_CSVM_up);
-   fChain->SetBranchAddress("bPogSF_CSVM_udsg_up", &bPogSF_CSVM_udsg_up, &b_bPogSF_CSVM_udsg_up);
-   fChain->SetBranchAddress("bPogSF_CSVM_bc_up", &bPogSF_CSVM_bc_up, &b_bPogSF_CSVM_bc_up);
-   fChain->SetBranchAddress("bPogSF_CSVM_down", &bPogSF_CSVM_down, &b_bPogSF_CSVM_down);
-   fChain->SetBranchAddress("bPogSF_CSVM_udsg_down", &bPogSF_CSVM_udsg_down, &b_bPogSF_CSVM_udsg_down);
-   fChain->SetBranchAddress("bPogSF_CSVM_bc_down", &bPogSF_CSVM_bc_down, &b_bPogSF_CSVM_bc_down);
-   fChain->SetBranchAddress("bPogSF_CSVT", &bPogSF_CSVT, &b_bPogSF_CSVT);
-   fChain->SetBranchAddress("bPogSF_CSVT_up", &bPogSF_CSVT_up, &b_bPogSF_CSVT_up);
-   fChain->SetBranchAddress("bPogSF_CSVT_udsg_up", &bPogSF_CSVT_udsg_up, &b_bPogSF_CSVT_udsg_up);
-   fChain->SetBranchAddress("bPogSF_CSVT_bc_up", &bPogSF_CSVT_bc_up, &b_bPogSF_CSVT_bc_up);
-   fChain->SetBranchAddress("bPogSF_CSVT_down", &bPogSF_CSVT_down, &b_bPogSF_CSVT_down);
-   fChain->SetBranchAddress("bPogSF_CSVT_udsg_down", &bPogSF_CSVT_udsg_down, &b_bPogSF_CSVT_udsg_down);
-   fChain->SetBranchAddress("bPogSF_CSVT_bc_down", &bPogSF_CSVT_bc_down, &b_bPogSF_CSVT_bc_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVL", &bPogSF_deepCSVL, &b_bPogSF_deepCSVL);
-   fChain->SetBranchAddress("bPogSF_deepCSVL_up", &bPogSF_deepCSVL_up, &b_bPogSF_deepCSVL_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVL_udsg_up", &bPogSF_deepCSVL_udsg_up, &b_bPogSF_deepCSVL_udsg_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVL_bc_up", &bPogSF_deepCSVL_bc_up, &b_bPogSF_deepCSVL_bc_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVL_down", &bPogSF_deepCSVL_down, &b_bPogSF_deepCSVL_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVL_udsg_down", &bPogSF_deepCSVL_udsg_down, &b_bPogSF_deepCSVL_udsg_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVL_bc_down", &bPogSF_deepCSVL_bc_down, &b_bPogSF_deepCSVL_bc_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVM", &bPogSF_deepCSVM, &b_bPogSF_deepCSVM);
-   fChain->SetBranchAddress("bPogSF_deepCSVM_up", &bPogSF_deepCSVM_up, &b_bPogSF_deepCSVM_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVM_udsg_up", &bPogSF_deepCSVM_udsg_up, &b_bPogSF_deepCSVM_udsg_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVM_bc_up", &bPogSF_deepCSVM_bc_up, &b_bPogSF_deepCSVM_bc_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVM_down", &bPogSF_deepCSVM_down, &b_bPogSF_deepCSVM_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVM_udsg_down", &bPogSF_deepCSVM_udsg_down, &b_bPogSF_deepCSVM_udsg_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVM_bc_down", &bPogSF_deepCSVM_bc_down, &b_bPogSF_deepCSVM_bc_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVT", &bPogSF_deepCSVT, &b_bPogSF_deepCSVT);
-   fChain->SetBranchAddress("bPogSF_deepCSVT_up", &bPogSF_deepCSVT_up, &b_bPogSF_deepCSVT_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVT_udsg_up", &bPogSF_deepCSVT_udsg_up, &b_bPogSF_deepCSVT_udsg_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVT_bc_up", &bPogSF_deepCSVT_bc_up, &b_bPogSF_deepCSVT_bc_up);
-   fChain->SetBranchAddress("bPogSF_deepCSVT_down", &bPogSF_deepCSVT_down, &b_bPogSF_deepCSVT_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVT_udsg_down", &bPogSF_deepCSVT_udsg_down, &b_bPogSF_deepCSVT_udsg_down);
-   fChain->SetBranchAddress("bPogSF_deepCSVT_bc_down", &bPogSF_deepCSVT_bc_down, &b_bPogSF_deepCSVT_bc_down);
-   fChain->SetBranchAddress("bPogSF", &bPogSF, &b_bPogSF);
-   fChain->SetBranchAddress("bPogSFUp", &bPogSFUp, &b_bPogSFUp);
-   fChain->SetBranchAddress("bPogSFDown", &bPogSFDown, &b_bPogSFDown);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape", &bPogSF_CMVAreshape, &b_bPogSF_CMVAreshape);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_jes", &bPogSF_CMVAreshape_up_jes, &b_bPogSF_CMVAreshape_up_jes);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_lf", &bPogSF_CMVAreshape_up_lf, &b_bPogSF_CMVAreshape_up_lf);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_hfstats1", &bPogSF_CMVAreshape_up_hfstats1, &b_bPogSF_CMVAreshape_up_hfstats1);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_hfstats2", &bPogSF_CMVAreshape_up_hfstats2, &b_bPogSF_CMVAreshape_up_hfstats2);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_cferr1", &bPogSF_CMVAreshape_up_cferr1, &b_bPogSF_CMVAreshape_up_cferr1);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_cferr2", &bPogSF_CMVAreshape_up_cferr2, &b_bPogSF_CMVAreshape_up_cferr2);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_hf", &bPogSF_CMVAreshape_up_hf, &b_bPogSF_CMVAreshape_up_hf);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_lfstats1", &bPogSF_CMVAreshape_up_lfstats1, &b_bPogSF_CMVAreshape_up_lfstats1);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_up_lfstats2", &bPogSF_CMVAreshape_up_lfstats2, &b_bPogSF_CMVAreshape_up_lfstats2);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_jes", &bPogSF_CMVAreshape_down_jes, &b_bPogSF_CMVAreshape_down_jes);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_lf", &bPogSF_CMVAreshape_down_lf, &b_bPogSF_CMVAreshape_down_lf);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_hfstats1", &bPogSF_CMVAreshape_down_hfstats1, &b_bPogSF_CMVAreshape_down_hfstats1);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_hfstats2", &bPogSF_CMVAreshape_down_hfstats2, &b_bPogSF_CMVAreshape_down_hfstats2);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_cferr1", &bPogSF_CMVAreshape_down_cferr1, &b_bPogSF_CMVAreshape_down_cferr1);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_cferr2", &bPogSF_CMVAreshape_down_cferr2, &b_bPogSF_CMVAreshape_down_cferr2);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_hf", &bPogSF_CMVAreshape_down_hf, &b_bPogSF_CMVAreshape_down_hf);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_lfstats1", &bPogSF_CMVAreshape_down_lfstats1, &b_bPogSF_CMVAreshape_down_lfstats1);
-   fChain->SetBranchAddress("bPogSF_CMVAreshape_down_lfstats2", &bPogSF_CMVAreshape_down_lfstats2, &b_bPogSF_CMVAreshape_down_lfstats2);
-   fChain->SetBranchAddress("bPogSF_CSVreshape", &bPogSF_CSVreshape, &b_bPogSF_CSVreshape);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_jes", &bPogSF_CSVreshape_up_jes, &b_bPogSF_CSVreshape_up_jes);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_lf", &bPogSF_CSVreshape_up_lf, &b_bPogSF_CSVreshape_up_lf);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_hfstats1", &bPogSF_CSVreshape_up_hfstats1, &b_bPogSF_CSVreshape_up_hfstats1);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_hfstats2", &bPogSF_CSVreshape_up_hfstats2, &b_bPogSF_CSVreshape_up_hfstats2);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_cferr1", &bPogSF_CSVreshape_up_cferr1, &b_bPogSF_CSVreshape_up_cferr1);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_cferr2", &bPogSF_CSVreshape_up_cferr2, &b_bPogSF_CSVreshape_up_cferr2);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_hf", &bPogSF_CSVreshape_up_hf, &b_bPogSF_CSVreshape_up_hf);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_lfstats1", &bPogSF_CSVreshape_up_lfstats1, &b_bPogSF_CSVreshape_up_lfstats1);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_up_lfstats2", &bPogSF_CSVreshape_up_lfstats2, &b_bPogSF_CSVreshape_up_lfstats2);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_jes", &bPogSF_CSVreshape_down_jes, &b_bPogSF_CSVreshape_down_jes);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_lf", &bPogSF_CSVreshape_down_lf, &b_bPogSF_CSVreshape_down_lf);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_hfstats1", &bPogSF_CSVreshape_down_hfstats1, &b_bPogSF_CSVreshape_down_hfstats1);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_hfstats2", &bPogSF_CSVreshape_down_hfstats2, &b_bPogSF_CSVreshape_down_hfstats2);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_cferr1", &bPogSF_CSVreshape_down_cferr1, &b_bPogSF_CSVreshape_down_cferr1);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_cferr2", &bPogSF_CSVreshape_down_cferr2, &b_bPogSF_CSVreshape_down_cferr2);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_hf", &bPogSF_CSVreshape_down_hf, &b_bPogSF_CSVreshape_down_hf);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_lfstats1", &bPogSF_CSVreshape_down_lfstats1, &b_bPogSF_CSVreshape_down_lfstats1);
-   fChain->SetBranchAddress("bPogSF_CSVreshape_down_lfstats2", &bPogSF_CSVreshape_down_lfstats2, &b_bPogSF_CSVreshape_down_lfstats2);
-   fChain->SetBranchAddress("std_vector_lepton_genmatched", &std_vector_lepton_genmatched, &b_std_vector_lepton_genmatched);
-   fChain->SetBranchAddress("std_vector_lepton_promptgenmatched", &std_vector_lepton_promptgenmatched, &b_std_vector_lepton_promptgenmatched);
    fChain->SetBranchAddress("std_vector_tau_SF", &std_vector_tau_SF, &b_std_vector_tau_SF);
    fChain->SetBranchAddress("std_vector_tau_SF_Up", &std_vector_tau_SF_Up, &b_std_vector_tau_SF_Up);
    fChain->SetBranchAddress("std_vector_tau_SF_Down", &std_vector_tau_SF_Down, &b_std_vector_tau_SF_Down);
@@ -2970,6 +2982,20 @@ Bool_t myselector::Notify()
    // user if needed. The return value is currently not used.
 
    return kTRUE;
+}
+
+void myselector::CopyVariables() {
+   s_std_vector_LHElepton_pt = std_vector_LHElepton_pt;
+   s_metLHEpt = metLHEpt;
+   s_LHE_mlvlv = LHE_mlvlv;
+   s_LHE_mlvlv_t = LHE_mlvlv_t;
+   s_LHE_mllmet = LHE_mllmet;
+   s_LHE_mll = LHE_mll;
+   s_LHE_theta = LHE_theta;
+   s_LHE_dphill = LHE_dphill;
+   s_LHE_dphilmet1 = LHE_dphilmet1;
+   s_LHE_dphilmet2 = LHE_dphilmet2;
+
 }
 
 #endif // #ifdef myselector_cxx

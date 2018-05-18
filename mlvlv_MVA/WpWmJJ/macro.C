@@ -5,6 +5,8 @@ option è l'argomento per determinare la selezione sugli eventi:
 */
 //.x macro(-1, "selection colz corr")		Esempi di esecuzione della macro
 //.x macro(20000, "raw surf abcd")
+//.x macro(-1, "selection abcd tree")
+
 void macro(int entries, TString option) {
 	//gRoot->Reset();
 	TFile *_file0 = TFile::Open("latino_WpWmJJ_EWK.root");
