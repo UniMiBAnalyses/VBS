@@ -54,6 +54,7 @@ public :
    Float_t         LHE_dphill;
    Float_t         LHE_dphilmet1;
    Float_t         LHE_dphilmet2;
+   Float_t         LHE_theta_jj;
 
    TH1F *	       _histo_leptons_per_event;
    TH1F *	       _histo_partons_per_event;
@@ -89,8 +90,13 @@ public :
    TH2F *          _histo2_dphilmet1_mlvlv;
    TH2F *          _histo2_dphilmet2_mlvlv;
    TH2F *          _histo2_dphillxmll_mlvlv;
+   TH2F *          _histo2_mjj_mlvlv;
+   TH2F *          _histo2_thetajjxmjj_mlvlv;
+   TH2F *          _histo2_parton1_pt_mlvlv;
+   TH2F *          _histo2_parton2_pt_mlvlv;
 
    vector<float>   *s_std_vector_LHElepton_pt;     //definisco le variabili di fChain_selected
+   vector<float>   *s_std_vector_LHEparton_pt;
    Float_t         s_metLHEpt;
    Float_t         s_LHE_mlvlv;
    Float_t         s_LHE_mlvlv_t;
@@ -100,6 +106,8 @@ public :
    Float_t         s_LHE_dphill;
    Float_t         s_LHE_dphilmet1;
    Float_t         s_LHE_dphilmet2;
+   Float_t         s_LHE_mjj;
+   Float_t         s_LHE_theta_jj;   
 
    Float_t         GEN_weight_SM;
    Float_t         Gen_ZGstar_MomId;
@@ -957,6 +965,8 @@ public :
    TBranch        *b_LHE_dphill;
    TBranch        *b_LHE_dphilmet1;
    TBranch        *b_LHE_dphilmet2;
+   TBranch        *b_LHE_mjj;
+   TBranch        *b_LHE_theta_jj;
 
    TBranch        *b_GEN_weight_SM;   //!
    TBranch        *b_Gen_ZGstar_MomId;   //!
@@ -2986,6 +2996,7 @@ Bool_t myselector::Notify()
 
 void myselector::CopyVariables() {
    s_std_vector_LHElepton_pt = std_vector_LHElepton_pt;
+   s_std_vector_LHEparton_pt = std_vector_LHEparton_pt;
    s_metLHEpt = metLHEpt;
    s_LHE_mlvlv = LHE_mlvlv;
    s_LHE_mlvlv_t = LHE_mlvlv_t;
@@ -2995,6 +3006,8 @@ void myselector::CopyVariables() {
    s_LHE_dphill = LHE_dphill;
    s_LHE_dphilmet1 = LHE_dphilmet1;
    s_LHE_dphilmet2 = LHE_dphilmet2;
+   s_LHE_mjj = LHE_mjj;
+   s_LHE_theta_jj = LHE_theta_jj;
 
 }
 

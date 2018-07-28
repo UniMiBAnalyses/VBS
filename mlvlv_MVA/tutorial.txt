@@ -1,0 +1,19 @@
+Per lavorare con la regressione useremo 4 macro per training, apply, plot e controllo overtraining.
+
+// Per distinguere le cartelle, assegnamo un "subname" ad ogni regressione (es. dataset_1, dataset_23, ...).
+TString subname;
+
+// Training della regressione con metodo BDTG con 800 NTrees, 0.13 Shrinkage, 0.85 GradBaggingFraction, 3 MaxDepth.
+subname = TrainRegression_bdtg("800", "0.13", "0.85", "3", Opt);
+
+// Applicare la regressione usando i pesi generati da TrainRegression_bdtg.cxx.
+ApplyRegression("BDTG", subname, Opt);
+
+// Plottare i risultati della regressione, usando i file .root generati da regressione BDTG.
+PlotRegression("", subname);
+
+//Plottare il risultato della regressione su Training/Test sample per verificare overtraining.
+Overtrain("", subname);
+
+// Eseguire tutte e 4 le fasi con uno script bash.
+./regression.sh

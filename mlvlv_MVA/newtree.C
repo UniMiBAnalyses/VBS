@@ -1,5 +1,4 @@
 /*
-Questa macro è un esempio per clonare un nuovo TTree con solo 3 Branches attivati.
 Questa macro apre il file WpWmJJ/latino_WpWmJJ_EWK.root, salva il TTree "latino" contenuto nel file
 e definisce le variabili associate ad ogni TBranch, che vengono attivate per essere salvate in un secondo TTree.
 Il risultato è un nuovo file, "small.root", che contiene solamente il TTree "latinino" con le variabili metLHE...

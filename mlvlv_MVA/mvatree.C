@@ -8,7 +8,7 @@ void mvatree() {
    /*char **files;
    files[0] = "WpWmJJ/latino_WpWmJJ_EWK.root";
    files[1] = "WpWpJJ/latino_WpWpJJ_EWK.root";*/
-
+   
    //Get old file, old tree and set top branch address
    TFile *oldfile = new TFile("WpWmJJ/latino_WpWmJJ_EWK.root");
    if(oldfile->IsOpen())	std::cout << "Apertura file riuscita." << std::endl;
